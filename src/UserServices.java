@@ -6,65 +6,63 @@ import java.util.Scanner;
 
 public class UserServices {
 
-    public static ArrayList loadFile() throws IOException {
+    public static ArrayList<String> loadFile() throws IOException {
         /*
           Returns the file load as Array List
         */
 
-        ArrayList allUsersInfo = new ArrayList();
+        ArrayList<String> allUsersInfo = new ArrayList<>();
         BufferedReader fileReader = null;
-        try{
+        try{//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'try' can use automatic resource management
             fileReader = new BufferedReader(new FileReader("data.txt"));
             String line ="";
             while ((line =fileReader.readLine()) != null) {allUsersInfo.add(line);}
             }
-        finally {fileReader.close();}
+        finally {fileReader.close();} // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'
         return allUsersInfo;
-    }
+    }//
 
     public static String getUserInfo(String userAttribute){
         /*
           Returns the user input.
          */
 
-        Scanner theInput = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
         System.out.println("Enter your " + userAttribute + ":");
-        return theInput.nextLine();
+        return userInput.next();
     }
 
-    public static void userLoggingCheck(int loggingOpportunities,User alreadyUser) throws IOException {
+    public static void userLoginCheck(int loginAttemptsOpportunities,User alreadyUser) throws IOException {
         /*
           Check if a user belong to an already users list
          */
 
         Object[] allUsersAttributesObject = (loadFile()).toArray();//loading file as ArrayList
 
-        while (loggingOpportunities>0){
+        while (loginAttemptsOpportunities>0){
             //Getting the user input
-            String userName = UserServices.getUserInfo("email");
-            String userPassword = UserServices.getUserInfo("password");
+            String userName = getUserInfo("email");
+            String userPassword = getUserInfo("password");
 
-            for (int x = 0; x < allUsersAttributesObject.length; x++) {
+            for (int x = 0; x < allUsersAttributesObject.length; x++) {//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'for' loop can be replaced with enhance with for
                 String[] singleUserAttributes = (allUsersAttributesObject[x]).toString().split(",");//users info to user info
                 alreadyUser.setUserName(singleUserAttributes[0]);
                 alreadyUser.setPassWord(singleUserAttributes[1]);
                 alreadyUser.setName(singleUserAttributes[2]);
 
-                if (userName.equalsIgnoreCase(alreadyUser.getUserName()) & userPassword.equals(alreadyUser.getPassWord())) {
+                if (userName.equalsIgnoreCase(alreadyUser.getUserName()) && userPassword.equals(alreadyUser.getPassWord())) {
                     System.out.println("Welcome: " + alreadyUser.getName());
-                    loggingOpportunities=0;
+                    loginAttemptsOpportunities=0;
                     break;
                 }
             }
-
-            if(loggingOpportunities>1){
-                loggingOpportunities--;
+            if(loginAttemptsOpportunities>1){
+                loginAttemptsOpportunities--;
                 System.out.println("Invalid login, please try again");
             }
-
-            else if (loggingOpportunities==1){
-                loggingOpportunities--;
-                System.out.print("Too many failed login attempts, you are now locked out.");
+            else if (loginAttemptsOpportunities==1){
+                loginAttemptsOpportunities--;
+                System.out.println("Too many failed login attempts, you are now locked out.");
             }
         }
     }
