@@ -13,12 +13,12 @@ public class UserServices {
 
         ArrayList<String> allUsersInfo = new ArrayList<>();
         BufferedReader fileReader = null;
-        try{//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'try' can use automatic resource management
+        try{//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'try' can use automatic resource management. IDEA gives solution but i want to understand pretty clear before taking any action
             fileReader = new BufferedReader(new FileReader("data.txt"));
             String line ="";
             while ((line =fileReader.readLine()) != null) {allUsersInfo.add(line);}
             }
-        finally {fileReader.close();} // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'
+        finally {fileReader.close();} // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'.IDEA gives solution but i want to understand pretty clear before taking any action
         return allUsersInfo;
     }//
 
@@ -29,7 +29,7 @@ public class UserServices {
 
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter your " + userAttribute + ":");
-        return userInput.next();
+        return userInput.next();//NOTE: Intellij IDEA didn't show me any warning about userInput.close(), eclipse IDEA does. want to know how to fix it. Explain please
     }
 
     public static void userLoginCheck(int loginAttemptsOpportunities,User alreadyUser) throws IOException {
