@@ -10,7 +10,6 @@ public class UserServices {
         /*
           Returns the file load as Array List
         */
-
         ArrayList<String> allUsersInfo = new ArrayList<>();
         BufferedReader fileReader = null;
         try{//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'try' can use automatic resource management. IDEA gives solution but i want to understand pretty clear before taking any action
@@ -18,9 +17,11 @@ public class UserServices {
             String line ="";
             while ((line =fileReader.readLine()) != null) {allUsersInfo.add(line);}
             }
-        finally {fileReader.close();} // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'.IDEA gives solution but i want to understand pretty clear before taking any action
+        finally {
+            fileReader.close();
+        } // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'.IDEA gives solution but i want to understand pretty clear before taking any action
         return allUsersInfo;
-    }//
+    }
 
     public static String getUserInfo(String userAttribute){
         /*
@@ -46,6 +47,7 @@ public class UserServices {
 
             for (int x = 0; x < allUsersAttributesObject.length; x++) {//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'for' loop can be replaced with enhance with for
                 String[] singleUserAttributes = (allUsersAttributesObject[x]).toString().split(",");//users info to user info
+                //NOTE: POJO object created for the purpose of the lesson but isn't really need it.We can iterate the data.txt list and compare its elements with user input without the POJO
                 alreadyUser.setUserName(singleUserAttributes[0]);
                 alreadyUser.setPassWord(singleUserAttributes[1]);
                 alreadyUser.setName(singleUserAttributes[2]);
