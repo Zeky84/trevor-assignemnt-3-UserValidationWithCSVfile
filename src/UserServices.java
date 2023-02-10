@@ -48,7 +48,7 @@ public class UserServices {
             String userName = getUserInfo("email");
             String userPassword = getUserInfo("password");
 
-            for (int x = 0; x < allUsersAttributesObject.length; x++) {//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'for' loop can be replaced with enhance with for
+            for (int x = 0; x < allUsersAttributesObject.length; x++) {
                 String[] singleUserAttributes = (allUsersAttributesObject[x]).toString().split(",");//users info to user info
                 alreadyUser.setUserName(singleUserAttributes[0]);
                 alreadyUser.setPassWord(singleUserAttributes[1]);
