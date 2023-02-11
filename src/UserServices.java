@@ -41,15 +41,15 @@ public class UserServices {
           Check if a user belong to an already users list
          */
 
-        Object[] allUsersAttributesObject = (loadFile()).toArray();//loading file as ArrayList
+        ArrayList<String> allUsersInfo = loadFile();//loading file
 
         while (loginAttemptsOpportunities>0){
             //Getting the user input
             String userName = getUserInfo("email");
             String userPassword = getUserInfo("password");
 
-            for (int x = 0; x < allUsersAttributesObject.length; x++) {
-                String[] singleUserAttributes = (allUsersAttributesObject[x]).toString().split(",");//users info to user info
+            for (String singleUserInfo: allUsersInfo) {
+                String[] singleUserAttributes = singleUserInfo.split(",");//users info to user info
                 alreadyUser.setUserName(singleUserAttributes[0]);
                 alreadyUser.setPassWord(singleUserAttributes[1]);
                 alreadyUser.setName(singleUserAttributes[2]);
