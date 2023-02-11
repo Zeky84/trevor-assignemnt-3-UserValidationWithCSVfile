@@ -21,8 +21,10 @@ public class UserServices {
             }
             }
         finally {
-            fileReader.close();
-        } // NOTE.PLEASE EXPLAIN Intellij IDEA says: Method invocation 'close' may produce 'NullPointerException'.IDEA gives solution but i want to understand pretty clear before taking any action
+            if (fileReader != null) {
+                fileReader.close();
+            }
+        }
         return allUsersInfo;
     }
 
