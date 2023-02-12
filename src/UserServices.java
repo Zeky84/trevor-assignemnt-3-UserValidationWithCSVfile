@@ -8,7 +8,7 @@ public class UserServices {
 
     public static ArrayList<String> loadFile() throws IOException {
         /*
-          Returns the file load as Array List
+          Returns the file load as Arraylist
         */
         ArrayList<String> allUsersInfo = new ArrayList<>();
         BufferedReader fileReader = null;
@@ -43,15 +43,14 @@ public class UserServices {
           Check if a user belong to an already users list
          */
 
-        ArrayList<String> allUsersInfo = loadFile();//loading file
 
         while (loginAttemptsOpportunities>0){
             //Getting the user input
             String userName = getUserInfo("email");
             String userPassword = getUserInfo("password");
 
-            for (String singleUserInfo: allUsersInfo) {
-                String[] singleUserAttributes = singleUserInfo.split(",");//users info to user info
+            for (String singleUserInfo: loadFile()) {//users info to user info
+                String[] singleUserAttributes = singleUserInfo.split(",");//user info splitting to user attributes
                 alreadyUser.setUserName(singleUserAttributes[0]);
                 alreadyUser.setPassWord(singleUserAttributes[1]);
                 alreadyUser.setName(singleUserAttributes[2]);
