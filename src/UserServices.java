@@ -32,7 +32,6 @@ public class UserServices {
         /*
           Returns the user input.
          */
-
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter your " + userAttribute + ":");
         return userInput.next();//NOTE: Intellij IDEA didn't show me any warning about userInput.close(), eclipse IDEA does. want to know how to fix it. Explain please
@@ -42,8 +41,6 @@ public class UserServices {
         /*
           Check if a user belong to an already users list
          */
-
-
         while (loginAttemptsOpportunities>0){
             //Getting the user input
             String userName = getUserInfo("email");
