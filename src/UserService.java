@@ -2,17 +2,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class UserServices {
+public class UserService {
 
-    public static ArrayList<String> loadFile() throws IOException {
+    private List<String> loadFile() throws IOException {
         /*
           Returns the file load as Arraylist
         */
-        ArrayList<String> allUsersInfo = new ArrayList<>();
+        List<String> allUsersInfo = new ArrayList<>();
         BufferedReader fileReader = null;
-        try{//NOTE.PLEASE EXPLAIN: Intellij IDEA suggest: 'try' can use automatic resource management. IDEA gives solution but i want to understand pretty clear before taking any action
+        try{
             fileReader = new BufferedReader(new FileReader("data.txt"));
             String line ="";
 
@@ -34,26 +35,25 @@ public class UserServices {
          */
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter your " + userAttribute + ":");
-        return userInput.next();//NOTE: Intellij IDEA didn't show me any warning about userInput.close(), eclipse IDEA does. want to know how to fix it. Explain please
+        return userInput.next();
     }
 
-    public static void userLoginCheck(int loginAttemptsOpportunities,User alreadyUser) throws IOException {
+    public void userLoginCheck(int loginAttemptsOpportunities) throws IOException {
         /*
           Check if a user belong to an already users list
          */
+
         while (loginAttemptsOpportunities>0){
             //Getting the user input
             String userName = getUserInfo("email");
             String userPassword = getUserInfo("password");
 
             for (String singleUserInfo: loadFile()) {//users info to user info
-                String[] singleUserAttributes = singleUserInfo.split(",");//user info splitting to user attributes
-                alreadyUser.setUserName(singleUserAttributes[0]);
-                alreadyUser.setPassWord(singleUserAttributes[1]);
-                alreadyUser.setName(singleUserAttributes[2]);
+                String[] UserAttributes = singleUserInfo.split(",");//user info splitting to user attributes
+                User user = new User(UserAttributes[0],UserAttributes[1],UserAttributes[2]);
 
-                if (userName.equalsIgnoreCase(alreadyUser.getUserName()) && userPassword.equals(alreadyUser.getPassWord())) {
-                    System.out.println("Welcome: " + alreadyUser.getName());
+                if (userName.equalsIgnoreCase(user.getUserName()) && userPassword.equals(user.getPassWord())) {
+                    System.out.println("Welcome: " + user.getName());
                     loginAttemptsOpportunities=0;
                     break;
                 }
